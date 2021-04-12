@@ -1,0 +1,52 @@
+
+
+entity Teatro{ 
+	id Integer required
+    nome String  
+}
+
+entity Cliente{
+	id Integer required
+    nome String
+}
+
+entity Assento{
+    assento Integer
+    sessao Integer
+    preco Float
+    disponibilidade Disponibilidade
+    horario LocalDate
+}
+
+enum Disponibilidade{
+	RESERVADO
+    DISPONIVEL
+}
+
+entity Ingresso{
+	cod Integer required
+    idteatro Integer
+    idcliente Integer
+    assento Integer
+    horario LocalDate
+    preco Float
+}
+
+relationship ManyToMany{
+	Cliente{teatros} to Teatro{clientes}
+}
+
+relationship OneToMany{
+	Teatro{ingressos} to Ingresso{teatro}
+}
+
+relationship OneToMany{
+	Cliente{ingressos} to Ingresso{cliente}
+}
+
+relationship OneToOne{
+	Assento to Ingresso
+}
+
+
+
